@@ -13,5 +13,10 @@ public class CadastroItens {
          Item mascaragemea = new Item("Máscara Gêmea","Armadura","Dano, Vida, Velocidade de Ataque e Vida");
          Item reverberacao = new Item("Reverberação","Armadura","Vida e Resistência");
          Item eclipse = new Item("Eclipse","Adaga","Dano e Escudo");
+         Item medalhaodesolari =  new Item("Medalhão de Solari","Escudo","Escudo e Resistência");
+         Item capuzdamortederabadon = new Item("Capuz da Morte de Rabadon","Armadura","Dano");
+         Item glacieterno = new Item("Glacieterno","Artefato","Dano e Controle de Grupo");
+         Item arcoescudoimortal = new Item ("Arco Escudo Imortal","Arco","Dano, Escudo e Roubo de Vida");
+         Item Insulina = new Item ("Insulina","Remédio","Mantém o Fellas vivo");
     }
 }
