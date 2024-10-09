@@ -59,7 +59,21 @@ public class CadastroItens {
 
         return resultados;
     }
+    public Item buscarPorNomeUnico(String nome) {
+        boolean encontrado = false;
+        for (Item item : itens) {
+            if (item.getNome().equalsIgnoreCase(nome)) {
+                encontrado = true;
+                return item;
+            }
+        }
+        if (!encontrado) {
+            return null;
+        }
 
+
+        return null;
+    }
     // Método para buscar itens por tipo
     public ArrayList<Item> buscarPorCategoria(String tipo, ArrayList<Item> itens) {
         ArrayList<Item> resultados = new ArrayList<>();

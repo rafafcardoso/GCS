@@ -53,7 +53,14 @@ public class Sistema {
 
 
     }
-
+    public Jogador buscarJogadorPorNome(String nome) {
+        for (Jogador jogador : jogadores) {
+            if (jogador.getNome().equalsIgnoreCase(nome)) {
+                return jogador; // Retorna o jogador se o nome coincidir
+            }
+        }
+        return null; // Retorna null se o jogador não for encontrado
+    }
 
 
 }

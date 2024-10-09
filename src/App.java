@@ -18,6 +18,8 @@ public class App {
             System.out.println("2) Login");
             System.out.println("3) Sair");
             System.out.println("4) Buscar Itens");
+            System.out.println("5) Adicionar Item ao Jogador");
+            System.out.println("6) Remover Item do Jogador");
             op = in.nextInt();
             in.nextLine();
 
@@ -34,10 +36,68 @@ public class App {
                 case 4:
                     cadastroItens.buscaItens();
                     break;
+                case 5:
+                    adicionarItemAoJogador();
+                    break;
+                case 6:
+                    removerItemDoJogador();
+                    break;
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
             }
         }
+
     }
+    private void adicionarItemAoJogador() {
+        // Solicitar nome do jogador
+        System.out.print("Digite o nome do jogador: ");
+        String nomeJogador = in.nextLine();
+        Jogador jogador = system.buscarJogadorPorNome(nomeJogador);
+
+        if (jogador == null) {
+            System.out.println("Jogador não encontrado.");
+            return;
+        }
+
+        // Solicitar nome do item
+        System.out.print("Digite o nome do item a ser adicionado: ");
+        String nomeItem = in.nextLine();
+        Item item = cadastroItens.buscarPorNomeUnico(nomeItem);
+
+        if (item == null) {
+            System.out.println("Item não encontrado.");
+            return;
+        }
+
+        // Adicionar o item ao jogador
+        jogador.adicionarItem(item);
+    }
+    private void removerItemDoJogador() {
+        System.out.print("Digite o nome do jogador: ");
+        String nomeJogador = in.nextLine();
+        Jogador jogador = system.buscarJogadorPorNome(nomeJogador);
+
+        if (jogador == null) {
+            System.out.println("Jogador não encontrado.");
+            return;
+        }
+
+        // Solicitar nome do item a ser removido
+        System.out.print("Digite o nome do item a ser removido: ");
+        String nomeItem = in.nextLine();
+        Item item = jogador.getItens().stream()
+                .filter(i -> i.getNome().equalsIgnoreCase(nomeItem))
+                .findFirst()
+                .orElse(null);
+
+        if (item == null) {
+            System.out.println("Item não encontrado no inventário do jogador.");
+            return;
+        }
+
+        // Remover o item do jogador
+        jogador.removerItem(item);
+    }
+
 }
