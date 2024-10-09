@@ -42,6 +42,7 @@ public class Sistema {
             if (j.getEmail().equals(email) && j.getSenha().equals(senha)){
                 System.out.println("Login com sucesso! Seja bem-vindo " + j.getNome());
                 aux = true;
+                App.jogadorlogado = j;
                 break;
             }
         }

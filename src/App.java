@@ -5,6 +5,7 @@ public class App {
     private Sistema system = new Sistema();
     private CadastroItens cadastroItens = new CadastroItens();
     private Scanner in = new Scanner(System.in);
+    public static Jogador jogadorlogado;
 
 
     public void executar(){
@@ -20,6 +21,7 @@ public class App {
             System.out.println("4) Buscar Itens");
             System.out.println("5) Adicionar Item ao Jogador");
             System.out.println("6) Remover Item do Jogador");
+            System.out.println("7) Mostrar Itens do Jogador");
             op = in.nextInt();
             in.nextLine();
 
@@ -42,12 +44,18 @@ public class App {
                 case 6:
                     removerItemDoJogador();
                     break;
+                case 7:
+                    mostrarItens();
+                    break;
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
             }
         }
 
+    }
+    public void mostrarItens(){
+        jogadorlogado.getItens();
     }
     private void adicionarItemAoJogador() {
         // Solicitar nome do jogador
