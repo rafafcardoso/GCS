@@ -42,7 +42,7 @@ public class CadastroItens {
             } else {
                 System.out.println("Itens encontrados:");
                 for (Item item : resultados) {
-                    System.out.println(item);
+                    System.out.println(item.toString());
                 }
             }
         }
