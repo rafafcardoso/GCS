@@ -5,8 +5,9 @@ public class Jogador {
     private String email;
     private String senha;
     private ArrayList<Item> itens; // Lista de itens do jogador
+    private ArrayList<Item> historico; // Lista do historico de trocas
+    private ArrayList<Integer> notas; // Lista de todas as notas recebidas
     private double avaliacao;
-    private ArrayList<Integer> notas;
 
     public Jogador(String nome, String email, String senha) {
         this.email = email;
@@ -14,6 +15,7 @@ public class Jogador {
         this.senha = senha;
         this.itens = new ArrayList<>(); // Inicializa a lista de itens
         this.notas = new ArrayList<>();
+        this.historico = new ArrayList<>();
         this.avaliacao = 0;
     }
 
@@ -57,6 +59,16 @@ public class Jogador {
         }
         avaliacao = soma/notas.size();
         setAvaliacao(avaliacao);
+    }
+
+    public void addHistoricoTroca(Item item){
+        historico.add(item);
+    }
+
+    public void mostrarHistoricoTroca(){
+        for(int i=0; i<historico.size(); i++){
+            System.out.println((historico.get(i)).toString());
+        }
     }
 
     public void adicionarItem(Item item) {

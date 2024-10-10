@@ -38,6 +38,11 @@ public class PropostaTroca {
             }
         jogador2.calculaAvaliacao(nota);
         // Aqui você pode implementar a lógica para remover e adicionar itens dos inventários dos jogadores, se existir um inventário
+
+
+        // Falta o metodo de troca para terminar o sistema de avaliaçao, façam ele em mente que os dois jogadores precisam avaliar
+
+
     }
 
     public Jogador getJogador1() {

@@ -56,7 +56,9 @@ public class App {
 
     }
     public void mostrarItens(){
-        jogadorlogado.getItens();
+        if(jogadorlogado != null){
+            jogadorlogado.getItens();
+        } else System.out.println("Erro: o jogador deve estar logado!");
     }
     private void adicionarItemAoJogador() {
         // Solicitar nome do jogador
