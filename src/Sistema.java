@@ -43,17 +43,20 @@ public class Sistema {
                 System.out.println("Login com sucesso! Seja bem-vindo " + j.getNome());
                 aux = true;
                 App.jogadorlogado = j;
+                j.mostrarPropostas();
                 break;
             }
         }
         if (!aux) {
             System.out.println("Email ou senha errados.");
         }
-
-
-
-
     }
+
+    public void logout(){
+        App.jogadorlogado = null;
+        System.out.println("Saindo da conta...");
+    }
+
     public Jogador buscarJogadorPorNome(String nome) {
         for (Jogador jogador : jogadores) {
             if (jogador.getNome().equalsIgnoreCase(nome)) {
@@ -63,5 +66,28 @@ public class Sistema {
         return null; // Retorna null se o jogador não for encontrado
     }
 
-
+    public void proporTroca(String nomeJogador1, String nomeJogador2) {
+        for (Jogador j : jogadores) {
+            if(j.getNome().equals(nomeJogador1)) {
+                for (Jogador jogador : jogadores) {
+                    if (jogador.getNome().equals(nomeJogador2)) {
+                        System.out.println("Qual item você quer deste jogador?");
+                        String nome = in.nextLine();
+                        if (jogador.buscaItemNome(nome)!=null) {
+                            Item item2 = jogador.buscaItemNome(nome);
+                            System.out.println("Qual item você está disposto a trocar?");
+                            String nome2 = in.nextLine();
+                            if (j.buscaItemNome(nome2)!=null) {
+                                Item item1 = j.buscaItemNome(nome2);
+                                PropostaTroca troca = new PropostaTroca(j, item1, jogador, item2);
+                                jogador.mandaProposta(troca);
+                                System.out.println("Proposta feita!");
+                                return;
+                            } else { System.out.println("Você não tem este item."); return;}
+                        } else { System.out.println("O jogador não tem este item."); return;}
+                    }
+                }
+            }
+        } System.out.println("Erro: um dos nomes está incorreto.");
+    }
 }

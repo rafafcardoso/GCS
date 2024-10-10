@@ -16,16 +16,21 @@ public class PropostaTroca {
 
     // Método para exibir os detalhes da troca
     public void exibirProposta() {
-        System.out.println("Proposta de Troca:");
-        System.out.println("Jogador 1: " + jogador1.getNome() + " deseja trocar o item: " + itemJogador1.getNome());
-        System.out.println("Jogador 2: " + jogador2.getNome() + " deseja trocar o item: " + itemJogador2.getNome());
-        System.out.println("Data e Hora da Proposta (milissegundos desde 1970): " + dataHoraTroca);
+        System.out.println("Jogador: " + jogador1.getNome() + " deseja trocar o item: " + itemJogador1.getNome() +
+                " por: " + itemJogador2.getNome());
+        System.out.println("Data e Hora da Proposta: " + dataHoraTroca);
     }
 
     public void confirmarTroca() {
         System.out.println("Troca confirmada entre " + jogador1.getNome() + " e " + jogador2.getNome());
         System.out.println(jogador1.getNome() + " recebeu o item: " + itemJogador2.getNome());
         System.out.println(jogador2.getNome() + " recebeu o item: " + itemJogador1.getNome());
+
+        jogador1.removerItem(itemJogador1);
+        jogador1.adicionarItem(itemJogador2);
+
+        jogador2.removerItem(itemJogador2);
+        jogador2.adicionarItem(itemJogador1);
         // Aqui você pode implementar a lógica para remover e adicionar itens dos inventários dos jogadores, se existir um inventário
     }
 
