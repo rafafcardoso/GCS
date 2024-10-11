@@ -83,8 +83,8 @@ public class Sistema {
                                 Item item1 = j.buscaItemNome(nome2);
                                 PropostaTroca troca = new PropostaTroca(j, item1, jogador, item2);
                                 jogador.mandaProposta(troca);
-                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                System.out.println("Proposta feita em: " + LocalDateTime.now());
+                                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                System.out.println("Proposta feita em: " + LocalDateTime.now().format(formato));
                                 return;
                             } else { System.out.println("Você não tem este item."); return;}
                         } else { System.out.println("O jogador não tem este item."); return;}
