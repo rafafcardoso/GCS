@@ -1,10 +1,13 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jogador {
     private String nome;
     private String email;
     private String senha;
     private ArrayList<Item> itens; // Lista de itens do jogador
+    private ArrayList<PropostaTroca> propostas; // Lista de propostas de trocas
+    private Scanner in = new Scanner(System.in);
     private ArrayList<Item> historico; // Lista do historico de trocas
     private ArrayList<Integer> notas; // Lista de todas as notas recebidas
     private double avaliacao;
@@ -13,10 +16,12 @@ public class Jogador {
         this.email = email;
         this.nome = nome;
         this.senha = senha;
-        this.itens = new ArrayList<>(); // Inicializa a lista de itens
+        this.itens = new ArrayList<>(); 
+        this.propostas = new ArrayList<>(); 
         this.notas = new ArrayList<>();
         this.historico = new ArrayList<>();
         this.avaliacao = 0;
+
     }
 
     public String getEmail() {
@@ -47,6 +52,41 @@ public class Jogador {
         return itens; // Retorna a lista de itens do jogador
     }
 
+    public Item buscaItemNome(String nomeItem){
+        for(Item item: itens){
+            if(item.getNome().equals(nomeItem)){
+                return item;
+            }
+        } return null;
+    }
+
+    public void adicionarItem(Item item) {
+        itens.add(item);
+    }
+
+
+    public void removerItem(Item item) {
+        itens.remove(item);
+    }
+
+    public void mandaProposta(PropostaTroca proposta){
+        propostas.add(proposta);
+    }
+
+    public void mostrarPropostas(){
+        int cont=1;
+        for(PropostaTroca proposta: propostas){
+            System.out.println("Proposta " + cont);
+            proposta.exibirProposta();
+            cont++;
+            System.out.println("Deseja aceitar a proposta?" + "\n1 - Sim" + "\n2 - Não");
+            int resposta = in.nextInt();
+            if(resposta == 1){
+                proposta.confirmarTroca();
+            } else if(resposta == 2){
+                propostas.remove(proposta);
+            } else System.out.println("Valor inválido.");
+
     public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
@@ -71,17 +111,6 @@ public class Jogador {
         }
     }
 
-    public void adicionarItem(Item item) {
-        itens.add(item);
-        System.out.println(item.getNome() + " adicionado ao jogador " + nome);
-    }
-
-
-    public void removerItem(Item item) {
-        if (itens.remove(item)) {
-            System.out.println(item.getNome() + " removido do jogador " + nome);
-        } else {
-            System.out.println("Item não encontrado na lista do jogador " + nome);
         }
     }
 
@@ -93,6 +122,7 @@ public class Jogador {
                 ", senha='" + senha + '\'' +
                 ", itens=" + itens +
                 ", avaliação=" + avaliacao +
+
                 '}';
     }
 }

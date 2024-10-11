@@ -17,11 +17,14 @@ public class App {
             System.out.println("MENU");
             System.out.println("1) Cadastrar novo jogador");
             System.out.println("2) Login");
-            System.out.println("3) Sair");
-            System.out.println("4) Buscar Itens");
-            System.out.println("5) Adicionar Item ao Jogador");
-            System.out.println("6) Remover Item do Jogador");
-            System.out.println("7) Mostrar Itens do Jogador");
+            System.out.println("3) Logout");
+            System.out.println("4) Sair");
+            System.out.println("5) Buscar Itens");
+            System.out.println("6) Adicionar Item ao Jogador");
+            System.out.println("7) Remover Item do Jogador");
+            System.out.println("8) Mostrar Itens do Jogador");
+            System.out.println("9) Propor troca para alguém");
+
             op = in.nextInt();
             in.nextLine();
 
@@ -34,20 +37,26 @@ public class App {
                     system.login();
                     break;
                 case 3:
-                    aux = true;
+                    system.logout();
                     break;
                 case 4:
-                    cadastroItens.buscaItens();
                     break;
                 case 5:
-                    adicionarItemAoJogador();
+                    cadastroItens.buscaItens();
                     break;
                 case 6:
-                    removerItemDoJogador();
+                    adicionarItemAoJogador();
                     break;
                 case 7:
+                    removerItemDoJogador();
+                    break;
+                case 8:
                     mostrarItens();
                     break;
+                case 9:
+                    troca();
+                    break;
+
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
@@ -55,10 +64,21 @@ public class App {
         }
 
     }
+
+
+    public void troca(){
+        System.out.println("Digite seu nome de usuário:");
+        String nome = in.nextLine();
+        System.out.println("Digite o nome do jogador com quem você quer trocar:");
+        String jogador = in.nextLine();
+        system.proporTroca(nome, jogador);
+    }
+
     public void mostrarItens(){
         if(jogadorlogado != null){
             jogadorlogado.getItens();
         } else System.out.println("Erro: o jogador deve estar logado!");
+      
     }
     private void adicionarItemAoJogador() {
         // Solicitar nome do jogador
