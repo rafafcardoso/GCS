@@ -5,11 +5,11 @@ public class Jogador {
     private String nome;
     private String email;
     private String senha;
-    private ArrayList<Item> itens; // Lista de itens do jogador
-    private ArrayList<PropostaTroca> propostas; // Lista de propostas de trocas
+    private ArrayList<Item> itens;
+    private ArrayList<PropostaTroca> propostas;
     private Scanner in = new Scanner(System.in);
-    private ArrayList<Item> historico; // Lista do historico de trocas
-    private ArrayList<Integer> notas; // Lista de todas as notas recebidas
+    private ArrayList<Item> historico;
+    private ArrayList<Integer> notas;
     private double avaliacao;
 
     public Jogador(String nome, String email, String senha) {
@@ -21,35 +21,22 @@ public class Jogador {
         this.notas = new ArrayList<>();
         this.historico = new ArrayList<>();
         this.avaliacao = 0;
-
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public ArrayList<Item> getItens() {
-        return itens; // Retorna a lista de itens do jogador
+        return itens;
     }
 
     public Item buscaItemNome(String nomeItem){
@@ -75,18 +62,19 @@ public class Jogador {
 
     public void mostrarPropostas(){
         int cont=1;
-        for(PropostaTroca proposta: propostas){
+        for(PropostaTroca proposta: propostas) {
             System.out.println("Proposta " + cont);
             proposta.exibirProposta();
             cont++;
             System.out.println("Deseja aceitar a proposta?" + "\n1 - Sim" + "\n2 - Não");
             int resposta = in.nextInt();
-            if(resposta == 1){
+            if (resposta == 1) {
                 proposta.confirmarTroca();
-            } else if(resposta == 2){
+            } else if (resposta == 2) {
                 propostas.remove(proposta);
             } else System.out.println("Valor inválido.");
-
+        }
+    }
     public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
@@ -108,9 +96,6 @@ public class Jogador {
     public void mostrarHistoricoTroca(){
         for(int i=0; i<historico.size(); i++){
             System.out.println((historico.get(i)).toString());
-        }
-    }
-
         }
     }
 

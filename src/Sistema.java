@@ -44,7 +44,6 @@ public class Sistema {
                 aux = true;
                 App.jogadorlogado = j;
                 j.mostrarPropostas();
-
                 break;
             }
         }
@@ -61,10 +60,10 @@ public class Sistema {
     public Jogador buscarJogadorPorNome(String nome) {
         for (Jogador jogador : jogadores) {
             if (jogador.getNome().equalsIgnoreCase(nome)) {
-                return jogador; // Retorna o jogador se o nome coincidir
+                return jogador;
             }
         }
-        return null; // Retorna null se o jogador não for encontrado
+        return null;
     }
 
     public void proporTroca(String nomeJogador1, String nomeJogador2) {

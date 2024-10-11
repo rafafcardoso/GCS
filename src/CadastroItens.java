@@ -70,11 +70,9 @@ public class CadastroItens {
         if (!encontrado) {
             return null;
         }
-
-
         return null;
     }
-    // Método para buscar itens por tipo
+
     public ArrayList<Item> buscarPorCategoria(String tipo, ArrayList<Item> itens) {
         ArrayList<Item> resultados = new ArrayList<>();
 
@@ -99,9 +97,7 @@ public class CadastroItens {
         return resultados;
     }
 
-    //Itens Fixos
     public void itensFixos() {
-        //nome,categoria,descricao
         Item espadadodivino = new Item("Espada do Divino", "Espada", "Dano Crítico");
         Item manopladoburaconegro = new Item("Manopla do Buraco Negro", "Manopla", "Tanque");
         Item decapitador = new Item("Decapitador", "Espada", "Dano de Ultimate");

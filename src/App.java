@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class App {
     private Sistema system = new Sistema();
     private CadastroItens cadastroItens = new CadastroItens();
@@ -12,7 +11,7 @@ public class App {
 
         int op;
         boolean aux = false;
-        cadastroItens.itensFixos();//cria os itens fixos
+        cadastroItens.itensFixos();
         while (!aux){
             System.out.println("MENU");
             System.out.println("1) Cadastrar novo jogador");
@@ -24,6 +23,7 @@ public class App {
             System.out.println("7) Remover Item do Jogador");
             System.out.println("8) Mostrar Itens do Jogador");
             System.out.println("9) Propor troca para alguém");
+            System.out.println("10) Mostrar histórico de trocas");
 
             op = in.nextInt();
             in.nextLine();
@@ -56,7 +56,9 @@ public class App {
                 case 9:
                     troca();
                     break;
-
+                case 10:
+                    historico();
+                    break;
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
@@ -64,7 +66,6 @@ public class App {
         }
 
     }
-
 
     public void troca(){
         System.out.println("Digite seu nome de usuário:");
@@ -74,6 +75,14 @@ public class App {
         system.proporTroca(nome, jogador);
     }
 
+    public void historico(){
+        if(jogadorlogado==null){
+            System.out.println("Você precisa estar logado.");
+            return;
+        }
+        jogadorlogado.mostrarHistoricoTroca();
+    }
+
     public void mostrarItens(){
         if(jogadorlogado != null){
             jogadorlogado.getItens();
@@ -81,7 +90,6 @@ public class App {
       
     }
     private void adicionarItemAoJogador() {
-        // Solicitar nome do jogador
         System.out.print("Digite o nome do jogador: ");
         String nomeJogador = in.nextLine();
         Jogador jogador = system.buscarJogadorPorNome(nomeJogador);
@@ -91,7 +99,6 @@ public class App {
             return;
         }
 
-        // Solicitar nome do item
         System.out.print("Digite o nome do item a ser adicionado: ");
         String nomeItem = in.nextLine();
         Item item = cadastroItens.buscarPorNomeUnico(nomeItem);
@@ -100,8 +107,6 @@ public class App {
             System.out.println("Item não encontrado.");
             return;
         }
-
-        // Adicionar o item ao jogador
         jogador.adicionarItem(item);
     }
     private void removerItemDoJogador() {
@@ -114,7 +119,6 @@ public class App {
             return;
         }
 
-        // Solicitar nome do item a ser removido
         System.out.print("Digite o nome do item a ser removido: ");
         String nomeItem = in.nextLine();
         Item item = jogador.getItens().stream()
@@ -127,7 +131,6 @@ public class App {
             return;
         }
 
-        // Remover o item do jogador
         jogador.removerItem(item);
     }
 

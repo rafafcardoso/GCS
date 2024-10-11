@@ -5,18 +5,16 @@ public class PropostaTroca {
     private Jogador jogador2;
     private Item itemJogador1;
     private Item itemJogador2;
-    private long dataHoraTroca; // Registro da data e hora da troca em milissegundos
+    private long dataHoraTroca;
 
-    // Construtor
     public PropostaTroca(Jogador jogador1, Item itemJogador1, Jogador jogador2, Item itemJogador2) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
         this.itemJogador1 = itemJogador1;
         this.itemJogador2 = itemJogador2;
-        this.dataHoraTroca = System.currentTimeMillis(); // Data e hora no momento da proposta
+        this.dataHoraTroca = System.currentTimeMillis();
     }
 
-    // Método para exibir os detalhes da troca
     public void exibirProposta() {
         System.out.println("Jogador: " + jogador1.getNome() + " deseja trocar o item: " + itemJogador1.getNome() +
                 " por: " + itemJogador2.getNome());
@@ -34,6 +32,9 @@ public class PropostaTroca {
         jogador2.removerItem(itemJogador2);
         jogador2.adicionarItem(itemJogador1);
 
+        jogador1.addHistoricoTroca(itemJogador1);
+        jogador2.addHistoricoTroca(itemJogador2);
+
         System.out.println("Qual sua nota (1 a 5) para o " + jogador2.getNome() + "?");
         Scanner in = new Scanner(System.in);
         int nota = in.nextInt();
@@ -45,25 +46,5 @@ public class PropostaTroca {
             }
         jogador2.calculaAvaliacao(nota);
 
-    }
-
-    public Jogador getJogador1() {
-        return jogador1;
-    }
-
-    public Jogador getJogador2() {
-        return jogador2;
-    }
-
-    public Item getItemJogador1() {
-        return itemJogador1;
-    }
-
-    public Item getItemJogador2() {
-        return itemJogador2;
-    }
-
-    public long getDataHoraTroca() {
-        return dataHoraTroca;
     }
 }
