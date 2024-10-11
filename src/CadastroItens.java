@@ -12,7 +12,7 @@ public class CadastroItens {
         while (on) {
             ArrayList<Item> resultados = new ArrayList<>();
 
-            System.out.println("Escolha uma opção: \n 1 - Busca por nome \n 2 - Busca por descrição \n 3 - Busca por categoria \n 0 - Sair");
+            System.out.println("Escolha uma opção: \n 1 - Busca por nome \n 2 - Busca por descrição \n 3 - Busca por categoria \n 4 - Exibir todos os itens \n 0 - Sair");
             int op = scanner.nextInt();
             scanner.nextLine();
             switch (op) {
@@ -30,6 +30,10 @@ public class CadastroItens {
                     System.out.println("Digite a categoria para buscar: ");
                     String categoria = scanner.nextLine();
                     resultados = buscarPorCategoria(categoria, itens);
+                    break;
+                case 4:
+                    System.out.println("Exibir todos os itens");
+                    resultados = itens;
                     break;
                 case 0:
                     on = false;
@@ -131,5 +135,11 @@ public class CadastroItens {
         itens.add(arcoescudoimortal);
         itens.add(Insulina);
     }
+
+    public int getTotalItens(){
+        return itens.size();
+    }
+
+
 }
 

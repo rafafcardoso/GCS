@@ -11,6 +11,7 @@ public class Jogador {
     private ArrayList<Item> historico;
     private ArrayList<Integer> notas;
     private double avaliacao;
+    private Estatisticas estatisticas = new Estatisticas();
 
     public Jogador(String nome, String email, String senha) {
         this.email = email;
@@ -70,9 +71,13 @@ public class Jogador {
             int resposta = in.nextInt();
             if (resposta == 1) {
                 proposta.confirmarTroca();
+                estatisticas.incrementarPropostasAceitas();
             } else if (resposta == 2) {
                 propostas.remove(proposta);
-            } else System.out.println("Valor inválido.");
+                estatisticas.incrementarPropostasNegadas();
+            } else {
+                System.out.println("Valor inválido.");
+            }
         }
     }
     public void setAvaliacao(double avaliacao) {

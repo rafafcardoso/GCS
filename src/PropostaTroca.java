@@ -23,6 +23,7 @@ public class PropostaTroca {
 
     public void confirmarTroca() {
         System.out.println("Troca confirmada entre " + jogador1.getNome() + " e " + jogador2.getNome());
+
         System.out.println(jogador1.getNome() + " recebeu o item: " + itemJogador2.getNome());
         System.out.println(jogador2.getNome() + " recebeu o item: " + itemJogador1.getNome());
 
@@ -45,6 +46,5 @@ public class PropostaTroca {
                 } while(nota < 1 || nota > 5);
             }
         jogador2.calculaAvaliacao(nota);
-
     }
 }

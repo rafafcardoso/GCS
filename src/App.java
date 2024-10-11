@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -5,6 +6,7 @@ public class App {
     private CadastroItens cadastroItens = new CadastroItens();
     private Scanner in = new Scanner(System.in);
     public static Jogador jogadorlogado;
+    private Estatisticas estatisticas = new Estatisticas();
 
 
     public void executar(){
@@ -13,17 +15,18 @@ public class App {
         boolean aux = false;
         cadastroItens.itensFixos();
         while (!aux){
-            System.out.println("MENU");
-            System.out.println("1) Cadastrar novo jogador");
-            System.out.println("2) Login");
-            System.out.println("3) Logout");
-            System.out.println("4) Sair");
-            System.out.println("5) Buscar Itens");
-            System.out.println("6) Adicionar Item ao Jogador");
-            System.out.println("7) Remover Item do Jogador");
-            System.out.println("8) Mostrar Itens do Jogador");
-            System.out.println("9) Propor troca para alguém");
-            System.out.println("10) Mostrar histórico de trocas");
+            System.out.println("-=-=-=-=- MENU -=-=-=-=-");
+            System.out.println("1. Cadastrar novo jogador");
+            System.out.println("2. Login");
+            System.out.println("3. Logout");
+            System.out.println("4. Sair");
+            System.out.println("5. Buscar Itens");
+            System.out.println("6. Adicionar Item ao Jogador");
+            System.out.println("7. Remover Item do Jogador");
+            System.out.println("8. Mostrar Itens do Jogador");
+            System.out.println("9. Propor troca para alguém");
+            System.out.println("10. Mostrar histórico de trocas");
+            System.out.println("11. Mostrar estatísticas gerais");
 
             op = in.nextInt();
             in.nextLine();
@@ -40,6 +43,7 @@ public class App {
                     system.logout();
                     break;
                 case 4:
+                    aux = true;
                     break;
                 case 5:
                     cadastroItens.buscaItens();
@@ -58,6 +62,9 @@ public class App {
                     break;
                 case 10:
                     historico();
+                    break;
+                case 11:
+                    mostrarEstatisticas();
                     break;
                 default:
                     System.out.println("Opcão invalida, digite novamente");
@@ -84,10 +91,20 @@ public class App {
     }
 
     public void mostrarItens(){
-        if(jogadorlogado != null){
-            jogadorlogado.getItens();
-        } else System.out.println("Erro: o jogador deve estar logado!");
-      
+        if (jogadorlogado != null){
+            ArrayList<Item> itens = jogadorlogado.getItens();
+            if (itens.isEmpty()) {
+                System.out.println("O jogador não possui itens.");
+            } else {
+                System.out.println("Itens do jogador:");
+                for (Item item : itens) {
+                    System.out.println(item.toString());
+                }
+            }
+        } else {
+            System.out.println("Você precisa estar logado.");
+        }
+
     }
     private void adicionarItemAoJogador() {
         System.out.print("Digite o nome do jogador: ");
@@ -133,5 +150,22 @@ public class App {
 
         jogador.removerItem(item);
     }
+
+    private void mostrarEstatisticas() {
+        System.out.println("Total de usuários: " + system.getTotalUsuarios());
+        System.out.println("Total de itens: " + cadastroItens.getTotalItens());
+        System.out.println("Quantidade de propostas aceitas: " + estatisticas.getPropostasAceitas());
+        System.out.println("Quantidade de propostas negadas: " + estatisticas.getPropostasNegadas());
+        System.out.println("Quantidade de propostas aguardadas: " + estatisticas.getPropostasAguardando());
+    }
+
+
+
+
+
+
+
+
+
 
 }

@@ -3,58 +3,90 @@ import java.util.ArrayList;
 
 public class Sistema {
     private ArrayList<Jogador> jogadores;
+    private ArrayList<PropostaTroca> propostas;
     private Scanner in;
+    private Estatisticas estatisticas = new Estatisticas();
 
     public Sistema(){
         jogadores = new ArrayList<>();
         in = new Scanner(System.in);
+        propostas = new ArrayList<>();
     }
 
 
     public void cadastrarJogador(){
-        System.out.println("Iniciando cadastro de jogadores...");
-        System.out.print("Nome: ");
+        System.out.println("Iniciando cadastro...");
+        System.out.print("Digite seu nome: ");
         String nome = in.nextLine();
+        if (nome.isBlank()) {
+            System.out.println("Você precisa digitar seu nome.");
+            return;
+        }
 
-        System.out.print("Email: ");
+
+        System.out.print("Digite seu email: ");
         String email = in.nextLine();
+        if (email.isBlank()) {
+            System.out.println("Você precisa digitar seu email.");
+            return;
+        }
 
-        System.out.print("Senha: ");
+
+
+        System.out.print("Digite seu PIN (6 dígitos): ");
         String senha = in.nextLine();
 
-        Jogador j = new Jogador(nome, email, senha);
-        jogadores.add(j);
-        System.out.println("Jogador cadastrado com sucesso!");
 
+        boolean jogadorCadastrado = false;
+
+
+
+        for (Jogador j : jogadores) {
+            if (email.equals(j.getEmail())) {
+                System.out.println("Já existe um usuário com esse email.");
+                jogadorCadastrado = true;
+                break;
+            }
+        }
+
+        if (!jogadorCadastrado) {
+            if (senha.length() == 6) {
+                Jogador jogador = new Jogador(nome, email, senha);
+                jogadores.add(jogador);
+                System.out.println("Jogador cadastrado com sucesso.");
+                estatisticas.incrementarTotalUsuarios();
+            } else {
+                System.out.println("Seu PIN deve ter 6 dígitos.");
+            }
+        }
     }
 
     public void login(){
         System.out.println("Iniciando login...");
-        System.out.print("Email: ");
+        System.out.print("Informe seu email: ");
         String email = in.nextLine();
-
-        System.out.print("Senha: ");
+        System.out.print("Informe seu PIN: ");
         String senha = in.nextLine();
 
 
-        boolean aux = false;
         for (Jogador j : jogadores){
             if (j.getEmail().equals(email) && j.getSenha().equals(senha)){
                 System.out.println("Login com sucesso! Seja bem-vindo " + j.getNome());
-                aux = true;
                 App.jogadorlogado = j;
                 j.mostrarPropostas();
-                break;
+                return;
             }
         }
-        if (!aux) {
-            System.out.println("Email ou senha errados.");
-        }
+        System.out.println("Email ou senha errados.");
     }
-  
+
     public void logout(){
-        App.jogadorlogado = null;
-        System.out.println("Saindo da conta...");
+        if (App.jogadorlogado == null){
+            System.out.println("Você não está logado.");
+        } else {
+            System.out.println("Saindo da conta...");
+            App.jogadorlogado = null;
+        }
     }
 
     public Jogador buscarJogadorPorNome(String nome) {
@@ -81,6 +113,7 @@ public class Sistema {
                                 Item item1 = j.buscaItemNome(nome2);
                                 PropostaTroca troca = new PropostaTroca(j, item1, jogador, item2);
                                 jogador.mandaProposta(troca);
+                                estatisticas.incrementarPropostasAguardando();
                                 System.out.println("Proposta feita!");
                                 return;
                             } else { System.out.println("Você não tem este item."); return;}
@@ -90,4 +123,16 @@ public class Sistema {
             }
         } System.out.println("Erro: um dos nomes está incorreto.");
     }
+
+    public int getTotalUsuarios() {
+        return jogadores.size();
+    }
+
+
+
+
+
+
+
+
 }
