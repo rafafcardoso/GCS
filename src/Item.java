@@ -16,17 +16,7 @@ public class Item {
     public String getDescription() {
         return description;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    @Override
     public String toString() {
         return "Nome: " + getNome() + " - Categoria: " + getCategoria() + " - Descrição: " + getDescription();
     }

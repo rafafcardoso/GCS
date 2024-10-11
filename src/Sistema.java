@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -44,7 +46,6 @@ public class Sistema {
                 aux = true;
                 App.jogadorlogado = j;
                 j.mostrarPropostas();
-
                 break;
             }
         }
@@ -61,10 +62,10 @@ public class Sistema {
     public Jogador buscarJogadorPorNome(String nome) {
         for (Jogador jogador : jogadores) {
             if (jogador.getNome().equalsIgnoreCase(nome)) {
-                return jogador; // Retorna o jogador se o nome coincidir
+                return jogador;
             }
         }
-        return null; // Retorna null se o jogador não for encontrado
+        return null;
     }
 
     public void proporTroca(String nomeJogador1, String nomeJogador2) {
@@ -82,7 +83,8 @@ public class Sistema {
                                 Item item1 = j.buscaItemNome(nome2);
                                 PropostaTroca troca = new PropostaTroca(j, item1, jogador, item2);
                                 jogador.mandaProposta(troca);
-                                System.out.println("Proposta feita!");
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                System.out.println("Proposta feita em: " + LocalDateTime.now());
                                 return;
                             } else { System.out.println("Você não tem este item."); return;}
                         } else { System.out.println("O jogador não tem este item."); return;}
