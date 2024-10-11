@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class PropostaTroca {
     private Jogador jogador1;
     private Jogador jogador2;
@@ -31,7 +33,18 @@ public class PropostaTroca {
 
         jogador2.removerItem(itemJogador2);
         jogador2.adicionarItem(itemJogador1);
-        // Aqui você pode implementar a lógica para remover e adicionar itens dos inventários dos jogadores, se existir um inventário
+
+        System.out.println("Qual sua nota (1 a 5) para o " + jogador2.getNome() + "?");
+        Scanner in = new Scanner(System.in);
+        int nota = in.nextInt();
+            if(nota <1 || nota > 5){
+                do {
+                    System.out.println("Número inválido! Digite novamente:");
+                    nota = in.nextInt();
+                } while(nota < 1 || nota > 5);
+            }
+        jogador2.calculaAvaliacao(nota);
+
     }
 
     public Jogador getJogador1() {

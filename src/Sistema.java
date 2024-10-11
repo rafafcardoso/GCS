@@ -44,6 +44,7 @@ public class Sistema {
                 aux = true;
                 App.jogadorlogado = j;
                 j.mostrarPropostas();
+
                 break;
             }
         }
@@ -51,7 +52,7 @@ public class Sistema {
             System.out.println("Email ou senha errados.");
         }
     }
-
+  
     public void logout(){
         App.jogadorlogado = null;
         System.out.println("Saindo da conta...");

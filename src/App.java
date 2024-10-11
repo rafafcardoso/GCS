@@ -24,6 +24,7 @@ public class App {
             System.out.println("7) Remover Item do Jogador");
             System.out.println("8) Mostrar Itens do Jogador");
             System.out.println("9) Propor troca para alguém");
+
             op = in.nextInt();
             in.nextLine();
 
@@ -55,6 +56,7 @@ public class App {
                 case 9:
                     troca();
                     break;
+
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
@@ -62,6 +64,7 @@ public class App {
         }
 
     }
+
 
     public void troca(){
         System.out.println("Digite seu nome de usuário:");
@@ -72,7 +75,10 @@ public class App {
     }
 
     public void mostrarItens(){
-        jogadorlogado.getItens();
+        if(jogadorlogado != null){
+            jogadorlogado.getItens();
+        } else System.out.println("Erro: o jogador deve estar logado!");
+      
     }
     private void adicionarItemAoJogador() {
         // Solicitar nome do jogador

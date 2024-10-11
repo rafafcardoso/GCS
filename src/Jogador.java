@@ -8,13 +8,20 @@ public class Jogador {
     private ArrayList<Item> itens; // Lista de itens do jogador
     private ArrayList<PropostaTroca> propostas; // Lista de propostas de trocas
     private Scanner in = new Scanner(System.in);
+    private ArrayList<Item> historico; // Lista do historico de trocas
+    private ArrayList<Integer> notas; // Lista de todas as notas recebidas
+    private double avaliacao;
 
     public Jogador(String nome, String email, String senha) {
         this.email = email;
         this.nome = nome;
         this.senha = senha;
-        this.itens = new ArrayList<>(); // Inicializa a lista de itens
-        this.propostas = new ArrayList<>(); // Inicializa a lista de propostas
+        this.itens = new ArrayList<>(); 
+        this.propostas = new ArrayList<>(); 
+        this.notas = new ArrayList<>();
+        this.historico = new ArrayList<>();
+        this.avaliacao = 0;
+
     }
 
     public String getEmail() {
@@ -79,6 +86,31 @@ public class Jogador {
             } else if(resposta == 2){
                 propostas.remove(proposta);
             } else System.out.println("Valor inválido.");
+
+    public void setAvaliacao(double avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public void calculaAvaliacao(int nota){
+        notas.add(nota);
+        int soma=0;
+        for(int i=0; i<notas.size(); i++){
+            soma += notas.get(i);
+        }
+        avaliacao = soma/notas.size();
+        setAvaliacao(avaliacao);
+    }
+
+    public void addHistoricoTroca(Item item){
+        historico.add(item);
+    }
+
+    public void mostrarHistoricoTroca(){
+        for(int i=0; i<historico.size(); i++){
+            System.out.println((historico.get(i)).toString());
+        }
+    }
+
         }
     }
 
@@ -89,6 +121,8 @@ public class Jogador {
                 ", nome='" + nome + '\'' +
                 ", senha='" + senha + '\'' +
                 ", itens=" + itens +
+                ", avaliação=" + avaliacao +
+
                 '}';
     }
 }
