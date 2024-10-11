@@ -20,6 +20,7 @@ Projeto desenvolvido em **Java**, com foco em manipulação de objetos e arrays,
 ### Troca entre os jogadores
 - **Propor Troca:** Permite o jogador a propor uma troca de item com outro jogador.
 - **Mostrar Propostas:** O jogador pode visualizar suas propostas de troca, aceitando ou recusando.
+- **Avaliar Jogador:** Permite que o jogador receba uma nota em relação a troca realizada.
 
 ### Histórico de Troca
 - **Histórico:** O jogador pode visualizar o histórico das trocas que realizou.
