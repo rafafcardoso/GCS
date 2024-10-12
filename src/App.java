@@ -9,12 +9,15 @@ public class App {
     private Estatisticas estatisticas = new Estatisticas();
 
 
-    public void executar() {
+    public void executar(){
+
 
         int op;
         boolean aux = false;
         cadastroItens.itensFixos();
-        while (!aux) {
+      
+        while (!aux){
+
             System.out.println("-=-=-=-=- MENU -=-=-=-=-");
             System.out.println("1. Cadastrar novo jogador");
             System.out.println("2. Login");
@@ -29,12 +32,14 @@ public class App {
             System.out.println("11. Mostrar estatísticas gerais");
             System.out.println("12. Organizar Inventario em ordem alfabetica");
             System.out.println("13. Organizar o Inventario de outro jogador por preço");
-
+          
             op = in.nextInt();
             in.nextLine();
 
 
-            switch (op) {
+
+            switch (op){
+
                 case 1:
                     system.cadastrarJogador();
                     break;
@@ -83,7 +88,8 @@ public class App {
     }
 
 
-    public void troca() {
+    public void troca(){
+
         System.out.println("Digite seu nome de usuário:");
         String nome = in.nextLine();
         System.out.println("Digite o nome do jogador com quem você quer trocar:");
@@ -91,16 +97,20 @@ public class App {
         system.proporTroca(nome, jogador);
     }
 
-    public void historico() {
-        if (jogadorlogado == null) {
+
+    public void historico(){
+        if(jogadorlogado==null){
+
             System.out.println("Você precisa estar logado.");
             return;
         }
         jogadorlogado.mostrarHistoricoTroca();
     }
 
-    public void mostrarItens() {
-        if (jogadorlogado != null) {
+
+    public void mostrarItens(){
+        if (jogadorlogado != null){
+
             ArrayList<Item> itens = jogadorlogado.getItens();
             if (itens.isEmpty()) {
                 System.out.println("O jogador não possui itens.");
@@ -137,6 +147,7 @@ public class App {
         jogador.adicionarItem(item);
     }
 
+
     private void removerItemDoJogador() {
         System.out.print("Digite o nome do jogador: ");
         String nomeJogador = in.nextLine();
@@ -171,6 +182,7 @@ public class App {
     }
 
 
+
     public void listarItensJogadorLogadoPorAlfabeto() {
         if (jogadorlogado == null) {
             System.out.println("Você precisa estar logado.");
@@ -198,18 +210,7 @@ public class App {
         }
 
     }
-
-
     public void metodoOrganizador() {
         system.organizaPorPreçodeOutrosPlayers(jogadorlogado);
     }
 }
-
-
-
-
-
-
-
-
-

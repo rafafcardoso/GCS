@@ -129,6 +129,7 @@ public class Sistema {
     }
 
 
+
     public void organizaPorPreçodeOutrosPlayers(Jogador jogadorlogado) {
         ArrayList<Item> itensDeOutrosJogadores = new ArrayList<>();
 
@@ -161,4 +162,5 @@ public class Sistema {
             System.out.println(item.getNome() + " - Preço: " + item.getPreco());
         }
     }
+
 }
