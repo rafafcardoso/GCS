@@ -130,9 +130,37 @@ public class Sistema {
 
 
 
+    public void organizaPorPreçodeOutrosPlayers(Jogador jogadorlogado) {
+        ArrayList<Item> itensDeOutrosJogadores = new ArrayList<>();
+
+        for (Jogador jogador : jogadores) {
+            if (!jogador.equals(jogadorlogado)) {
+                itensDeOutrosJogadores.addAll(jogador.getItens());
+            }
+        }
 
 
+        for (int i = 0; i < itensDeOutrosJogadores.size() - 1; i++) {
+            for (int j = i + 1; j < itensDeOutrosJogadores.size(); j++) {
+
+                int preco1 = itensDeOutrosJogadores.get(i).getPreco();
+                int preco2 = itensDeOutrosJogadores.get(j).getPreco();
 
 
+                if (preco1 > preco2) {
+
+                    Item aux = itensDeOutrosJogadores.get(i);
+                    itensDeOutrosJogadores.set(i, itensDeOutrosJogadores.get(j));
+                    itensDeOutrosJogadores.set(j, aux);
+                }
+            }
+        }
+
+
+        System.out.println("Itens de outros jogadores ordenados por preço:");
+        for (Item item : itensDeOutrosJogadores) {
+            System.out.println(item.getNome() + " - Preço: " + item.getPreco());
+        }
+    }
 
 }

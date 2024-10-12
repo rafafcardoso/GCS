@@ -11,10 +11,13 @@ public class App {
 
     public void executar(){
 
+
         int op;
         boolean aux = false;
         cadastroItens.itensFixos();
+      
         while (!aux){
+
             System.out.println("-=-=-=-=- MENU -=-=-=-=-");
             System.out.println("1. Cadastrar novo jogador");
             System.out.println("2. Login");
@@ -27,12 +30,16 @@ public class App {
             System.out.println("9. Propor troca para alguém");
             System.out.println("10. Mostrar histórico de trocas");
             System.out.println("11. Mostrar estatísticas gerais");
-
+            System.out.println("12. Organizar Inventario em ordem alfabetica");
+            System.out.println("13. Organizar o Inventario de outro jogador por preço");
+          
             op = in.nextInt();
             in.nextLine();
 
 
+
             switch (op){
+
                 case 1:
                     system.cadastrarJogador();
                     break;
@@ -66,6 +73,12 @@ public class App {
                 case 11:
                     mostrarEstatisticas();
                     break;
+                case 12:
+                    listarItensJogadorLogadoPorAlfabeto();
+                    break;
+                case 13:
+                    metodoOrganizador();
+                    break;
                 default:
                     System.out.println("Opcão invalida, digite novamente");
 
@@ -74,7 +87,9 @@ public class App {
 
     }
 
+
     public void troca(){
+
         System.out.println("Digite seu nome de usuário:");
         String nome = in.nextLine();
         System.out.println("Digite o nome do jogador com quem você quer trocar:");
@@ -82,16 +97,20 @@ public class App {
         system.proporTroca(nome, jogador);
     }
 
+
     public void historico(){
         if(jogadorlogado==null){
+
             System.out.println("Você precisa estar logado.");
             return;
         }
         jogadorlogado.mostrarHistoricoTroca();
     }
 
+
     public void mostrarItens(){
         if (jogadorlogado != null){
+
             ArrayList<Item> itens = jogadorlogado.getItens();
             if (itens.isEmpty()) {
                 System.out.println("O jogador não possui itens.");
@@ -106,6 +125,7 @@ public class App {
         }
 
     }
+
     private void adicionarItemAoJogador() {
         System.out.print("Digite o nome do jogador: ");
         String nomeJogador = in.nextLine();
@@ -126,6 +146,8 @@ public class App {
         }
         jogador.adicionarItem(item);
     }
+
+
     private void removerItemDoJogador() {
         System.out.print("Digite o nome do jogador: ");
         String nomeJogador = in.nextLine();
@@ -161,11 +183,34 @@ public class App {
 
 
 
+    public void listarItensJogadorLogadoPorAlfabeto() {
+        if (jogadorlogado == null) {
+            System.out.println("Você precisa estar logado.");
+            return;
+        }
 
+        ArrayList<Item> itens = jogadorlogado.getItens();
+        if (itens.isEmpty()) {
+            System.out.println("O jogador não possui itens.");
+        } else {
+            for (int i = 0; i < itens.size() - 1; i++) {
+                for (int j = i + 1; j < itens.size(); j++) {
+                    if (itens.get(i).getNome().compareToIgnoreCase(itens.get(j).getNome()) > 0) {
+                        Item temp = itens.get(i);
+                        itens.set(i, itens.get(j));
+                        itens.set(j, temp);
+                    }
+                }
+            }
 
+            System.out.println("Itens do jogador em ordem alfabética:");
+            for (Item item : itens) {
+                System.out.println(item.getNome());
+            }
+        }
 
-
-
-
-
+    }
+    public void metodoOrganizador() {
+        system.organizaPorPreçodeOutrosPlayers(jogadorlogado);
+    }
 }
