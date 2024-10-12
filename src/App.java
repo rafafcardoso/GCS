@@ -27,6 +27,8 @@ public class App {
             System.out.println("9. Propor troca para alguém");
             System.out.println("10. Mostrar histórico de trocas");
             System.out.println("11. Mostrar estatísticas gerais");
+            System.out.println("12. Organizar Inventario em ordem alfabetica");
+            System.out.println("13. Organizar o Inventario de outro jogador por preço");
 
             op = in.nextInt();
             in.nextLine();
